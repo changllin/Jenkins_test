@@ -1,4 +1,4 @@
-node('haimaxy-jnlp') {
+node('jenkins-slave') {
     stage('Prepare') {
         echo "1.Prepare Stage"
         checkout scm
@@ -14,13 +14,13 @@ node('haimaxy-jnlp') {
     }
     stage('Build') {
         echo "3.Build Docker Image Stage"
-        sh "docker build -t cnych/jenkins-demo:${build_tag} ."
+        sh "docker build -t 192.168.0.36/java_lyh/jenkins-demo:${build_tag} ."
     }
     stage('Push') {
         echo "4.Push Docker Image Stage"
-        withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-            sh "docker login -u ${dockerHubUser} -p ${dockerHubPassword}"
-            sh "docker push cnych/jenkins-demo:${build_tag}"
+        withCredentials([usernamePassword(credentialsId: 'harbor-test', passwordVariable: 'harbor-testPassword', usernameVariable: 'harbor-testUser')]) {
+            sh "docker login -u ${harbor-testUser} 192.168.0.36 -p ${harbor-testPassword}"
+            sh "docker push 192.168.0.36/java_lyh/jenkins-demo:${build_tag}"
         }
     }
     stage('Deploy') {
