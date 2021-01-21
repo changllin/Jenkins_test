@@ -18,8 +18,8 @@ node('jenkins-slave') {
     }
     stage('Push') {
         echo "4.Push Docker Image Stage"
-        withCredentials([usernamePassword(credentialsId: 'harbor-test', passwordVariable: 'harbor-testPassword', usernameVariable: 'harbor-testUser')]) {
-            sh "docker login -u ${harbor-testUser} 192.168.0.36 -p ${harbor-testPassword}"
+        withCredentials([usernamePassword(credentialsId: 'harbort', passwordVariable: 'harbortPassword', usernameVariable: 'harbortUser')]) {
+            sh "docker login -u ${harbortUser} 192.168.0.36 -p ${harbortPassword}"
             sh "docker push 192.168.0.36/java_lyh/jenkins-demo:${build_tag}"
         }
     }
