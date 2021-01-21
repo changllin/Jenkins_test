@@ -1,10 +1,10 @@
-FROM golang:1.8.0-alpine
-#FROM golang
+FROM centos
 
-ADD . /go/src/app
+RUN yum install nginx -y
+RUN yum install net-tools -y
+RUN rm -f /usr/share/nginx/html/index.html
+COPY ./index.html /usr/share/nginx/html/
 
-WORKDIR /go/src/app
+EXPOSE 80 
 
-RUN GOOS=linux GOARCH=386 go build -v -o /go/src/app/jenkins-app
-
-CMD ["./jenkins-app"]
+CMD ["/usr/sbin/nginx", "-g", "daemon off;"]
