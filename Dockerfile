@@ -1,5 +1,5 @@
-#FROM golang:1.8.0-alpine
-FROM golang
+FROM golang:1.8.0-alpine
+#FROM golang
 
 ADD . /go/src/app
 
