@@ -19,3 +19,5 @@ spec:
         env:
         - name: branch
           value: <BRANCH_NAME>
+      imagePullSecrets:
+        - name: harborsecret
